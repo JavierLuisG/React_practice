@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import todos from './todos.json';
 import React, { Component } from 'react';
+import TodoForm from './components/TodoForm';
 
 class App extends Component {
   // Como react muestra los datos traidos? -> almacenandolos temporalmente en memoria
@@ -9,8 +10,9 @@ class App extends Component {
     super();
     this.state = {
       todos: todos.todos
-    }
+    };
   }
+  
   render() {
     const todosCard = this.state.todos.map((todo, i) => {
       return (
@@ -32,12 +34,11 @@ class App extends Component {
     })
     
     return (
-
       <div className="App">
         <nav className='navbar navbar-dark bg-dark'>
-          <a href='' className='text-white'>
+          <a href='' className='text-white ms-3'>
             Tareas
-            <span className='badge rounded-pill text-bg-light ml-2'>
+            <span className='badge rounded-pill text-bg-light ms-2'>
               { this.state.todos.length }
             </span>
           </a>
@@ -45,11 +46,17 @@ class App extends Component {
 
         <div className='container'>
           <div className='row mt-4'>
-            {todosCard}
+            <div className='col-md-3'>
+              <img src={logo} className="App-logo" alt="logo" />
+              <TodoForm />
+            </div>
+            <div className='col-md-9'>
+              <div className='row'>
+                { todosCard }
+              </div>
+            </div>            
           </div>
-        </div>        
-
-        <img src={logo} className="App-logo" alt="logo" />
+        </div>  
       </div>
     );
   }  
