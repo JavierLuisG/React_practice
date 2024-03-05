@@ -20,6 +20,16 @@ class App extends Component {
     });
   }
   
+  handleRemoveTodo(index) {
+    if (window.confirm('Are you sure you want to delete if?')) {
+      this.setState({
+        todos: this.state.todos.filter((e, i) => {
+          return i !== index
+        })
+      });
+    }    
+  }
+
   render() {
     const todosCard = this.state.todos.map((todo, i) => {
       return (
@@ -27,14 +37,19 @@ class App extends Component {
           <div key={i} className='card mt-4'>
             <div className='card-header'>
               <h3>{todo.title}</h3>
-              <span className="badge rounded-pill text-bg-danger ml-2">
+              <span className="badge rounded-pill text-bg-primary ml-2">
                 {todo.priority}
               </span>
             </div>          
             <div className='card-body'>
               <p>{todo.description}</p>
               <p><strong>{todo.responsible}</strong></p>
-            </div>          
+            </div>   
+            <div className='card-footer'>
+              <button className='btn btn-danger' onClick={this.handleRemoveTodo.bind(this, i)}>
+                Delete
+              </button>              
+            </div>       
           </div>
         </div>        
       )
@@ -44,7 +59,7 @@ class App extends Component {
       <div className="App">
         <nav className='navbar navbar-dark bg-dark'>
           <a href='' className='text-white ms-3'>
-            Tareas
+            Task
             <span className='badge rounded-pill text-bg-light ms-2'>
               { this.state.todos.length }
             </span>
