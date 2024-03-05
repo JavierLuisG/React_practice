@@ -14,25 +14,41 @@ class App extends Component {
   render() {
     const todosCard = this.state.todos.map((todo, i) => {
       return (
-        <div key={i} className='card'>
-          <div className='card-header'>
-            <h3>{todo.title}</h3>
-          </div>          
-          <div className='card-body'>
-            <p>{todo.description}</p>
-          </div>          
+        <div className='col-md-4'>
+          <div key={i} className='card mt-4'>
+            <div className='card-header'>
+              <h3>{todo.title}</h3>
+              <span className="badge rounded-pill text-bg-danger ml-2">
+                {todo.priority}
+              </span>
+            </div>          
+            <div className='card-body'>
+              <p>{todo.description}</p>
+              <p><strong>{todo.responsible}</strong></p>
+            </div>          
+          </div>
         </div>        
       )
     })
     
     return (
+
       <div className="App">
         <nav className='navbar navbar-dark bg-dark'>
           <a href='' className='text-white'>
             Tareas
+            <span className='badge rounded-pill text-bg-light ml-2'>
+              { this.state.todos.length }
+            </span>
           </a>
         </nav>         
-        {todosCard}       
+
+        <div className='container'>
+          <div className='row mt-4'>
+            {todosCard}
+          </div>
+        </div>        
+
         <img src={logo} className="App-logo" alt="logo" />
       </div>
     );
